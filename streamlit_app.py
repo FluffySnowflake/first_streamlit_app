@@ -16,10 +16,15 @@ streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 #my_fruit_list = pd.read_csv(" https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 
-# asking the streamlit library to display the above dataframe on the page:
-streamlit.dataframe(my_fruit_list)
+# Change the dataframe index to 'fruit' so the drop down list would behave in the app
+my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # Let's put a pick list here so they can pick the fruit they want to include 
 streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
 
-# Display the table on the page.
+# asking the streamlit library to display the above dataframe on the page:
+streamlit.dataframe(my_fruit_list)
+
+
+
+
