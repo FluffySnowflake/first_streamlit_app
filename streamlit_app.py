@@ -19,13 +19,17 @@ my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.co
 # Change the dataframe index to 'fruit' so the drop down list would behave in the app
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
+# asking the streamlit library to display the above dataframe on the page:
+streamlit.dataframe(my_fruit_list) 
 
 # Let's put a pick list here so they can pick the fruit they want to include 
-# pre-populate the list to set an example for the customer
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
+# pre-populate the list to set an example for the customer with 'Avocado', 'Strawberries']
+# fruits_selected keeps the choices
+fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index), ['Avocado', 'Strawberries'])
+fruits_to_show = my_fruit_list.loc[fruits_selected]
 
-# asking the streamlit library to display the above dataframe on the page:
-streamlit.dataframe(my_fruit_list)
+# asking the streamlit library to display the choices the customer made:
+streamlit.dataframe(fruits_to_show)
 
 
 
